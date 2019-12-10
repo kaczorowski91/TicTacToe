@@ -1,15 +1,19 @@
 package com.kodilla.tictactoe;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Line {
 
-    Field field0, field1, field2;
-    // czy da się zrobić konstruktor z różna ilością pól i jak? varargs
+    List<Field> fields;
 
-    public Line(Field field0, Field field1, Field field2) {
-        this.field0 = field0;
-        this.field1 = field1;
-        this.field2 = field2;
+
+    public Line(Field... fields) {
+
+        this.fields = new ArrayList<>(Arrays.asList(fields));
+
 
     }
 

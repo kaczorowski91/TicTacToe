@@ -5,14 +5,14 @@ import javafx.scene.image.ImageView;
 
 public class Field extends ImageView {
 
-    private static boolean turnX=true;  //dlaczego tu musi być statyczna
+    private static boolean turnX = true;
 
-    public Field (Image image){
+    public Field(Image image) {
         super(image);
         this.setOnMouseClicked(event -> mouseClicked());
     }
 
-    private void mouseClicked(){
+    private void mouseClicked() {
 
         if (getImage() == Images.EMPTY) {
             if (turnX) {
