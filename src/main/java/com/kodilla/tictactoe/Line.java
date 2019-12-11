@@ -17,4 +17,7 @@ public class Line {
 
     }
 
+    public List<Field> getFields() {
+        return fields;
+    }
 }
