@@ -12,6 +12,7 @@ public class GameLauncher extends Application {
 
     private final FieldStorage fieldStorage;
     private final LineStorage lineStorage;
+    public static GameLauncher gameLauncher;
 
 
     public GameLauncher() {
@@ -20,6 +21,25 @@ public class GameLauncher extends Application {
         this.lineStorage = new LineStorage(fieldStorage);
 
     }
+
+
+    public boolean win() {
+        for (int i = 0; i < lineStorage.getWinLines().size(); i++) {
+            for (Line line : lineStorage.getWinLines()) {
+                Field field1 = line.getFields().get(0);
+                Field field2 = line.getFields().get(1);
+                Field field3 = line.getFields().get(2);
+
+                if (field1.getImage() != Images.EMPTY && field1.getImage().equals(field2.getImage()) &&
+                        field2.getImage().equals(field3.getImage())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,7 +50,7 @@ public class GameLauncher extends Application {
 
         grid.setHgap(20);
         grid.setVgap(20);
-        Scene scene = new Scene(grid, 1000, 800, Color.BLACK);
+        Scene scene = new Scene(grid, 1000, 800, Color.YELLOW);
 
 
         primaryStage.setScene(scene);
@@ -48,8 +68,6 @@ public class GameLauncher extends Application {
         grid.add(fieldStorage.getField(0, 2), 0, 2);
         grid.add(fieldStorage.getField(2, 1), 2, 1);
         grid.add(fieldStorage.getField(2, 2), 2, 2);
-
-
 
 
     }
