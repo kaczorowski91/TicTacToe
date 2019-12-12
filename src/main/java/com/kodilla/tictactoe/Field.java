@@ -24,6 +24,10 @@ public class Field extends ImageView {
             }
         }
 
+      if(GameLauncher.gameLauncher.win()){
+            GameLauncher.gameLauncher.setWin();
+
+      }
 
     }
 }

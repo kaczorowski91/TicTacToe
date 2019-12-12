@@ -6,7 +6,7 @@ public class FieldStorage {
 
     public FieldStorage() {
 
-        for(int x=0; x<fields.length; x++){
+        for (int x = 0; x < fields.length; x++) {
             for(int y=0; y<fields[x].length;y++){
                 fields [x][y] = new Field(Images.EMPTY);
             }
@@ -17,6 +17,12 @@ public class FieldStorage {
         return fields[x][y];
     }
 
+
+    public static WinField winfield = new WinField(Images.EMPTY);
+
+    public WinField getWinfield() {
+        return winfield;
+    }
 
 
 }

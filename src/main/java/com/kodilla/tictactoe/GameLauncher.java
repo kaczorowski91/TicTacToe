@@ -36,9 +36,12 @@ public class GameLauncher extends Application {
                 }
             }
         }
-        return false;
+        return true;
     }
-    
+
+    public void setWin() {
+        fieldStorage.getWinfield().setWin();
+    }
 
 
     @Override
@@ -68,7 +71,7 @@ public class GameLauncher extends Application {
         grid.add(fieldStorage.getField(0, 2), 0, 2);
         grid.add(fieldStorage.getField(2, 1), 2, 1);
         grid.add(fieldStorage.getField(2, 2), 2, 2);
-
+        grid.add(fieldStorage.getWinfield(), 4, 1);
 
     }
 
