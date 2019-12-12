@@ -6,12 +6,14 @@ import javafx.scene.image.ImageView;
 
 public class WinField extends ImageView {
 
-    public WinField(Image image) {super (image);}
+    public WinField(Image image) {
+        super(image);
+    }
 
 
-    public void setWin(){
+    public void setWin() {
         setImage(Images.CROSS);
     }
 
-    }
+}
 

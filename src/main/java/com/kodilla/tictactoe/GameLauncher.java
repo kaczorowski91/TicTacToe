@@ -8,19 +8,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class GameLauncher extends Application {
 
     private final FieldStorage fieldStorage;
     private final LineStorage lineStorage;
-    public static GameLauncher gameLauncher;
+   private final GameLauncher gameLauncher;
 
 
     public GameLauncher() {
 
         this.fieldStorage = new FieldStorage();
         this.lineStorage = new LineStorage(fieldStorage);
-
-    }
+        this.gameLauncher = new GameLauncher();
+        }
 
 
     public boolean win() {
@@ -39,9 +40,7 @@ public class GameLauncher extends Application {
         return true;
     }
 
-    public void setWin() {
-        fieldStorage.getWinfield().setWin();
-    }
+
 
 
     @Override
