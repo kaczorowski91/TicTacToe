@@ -6,10 +6,12 @@ import javafx.scene.image.ImageView;
 public class Field extends ImageView {
 
     private static boolean turnX = true;
+    private final GameLauncher gameLauncher;
 
-    public Field(Image image) {
+    public Field(Image image, GameLauncher gameLauncher) {
         super(image);
         this.setOnMouseClicked(event -> mouseClicked());
+        this.gameLauncher=gameLauncher;
     }
 
     private void mouseClicked() {
@@ -22,6 +24,8 @@ public class Field extends ImageView {
                 this.setImage(Images.CIRCLE);
                 turnX = true;
             }
+            gameLauncher.win();
+
         }
 
         }

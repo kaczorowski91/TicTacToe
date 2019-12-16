@@ -13,34 +13,28 @@ public class GameLauncher extends Application {
 
     private final FieldStorage fieldStorage;
     private final LineStorage lineStorage;
-   private final GameLauncher gameLauncher;
 
 
     public GameLauncher() {
 
-        this.fieldStorage = new FieldStorage();
+        this.fieldStorage = new FieldStorage(this);
         this.lineStorage = new LineStorage(fieldStorage);
-        this.gameLauncher = new GameLauncher();
-        }
 
-
-    public boolean win() {
-        for (int i = 0; i < lineStorage.getWinLines().size(); i++) {
-            for (Line line : lineStorage.getWinLines()) {
-                Field field1 = line.getFields().get(0);
-                Field field2 = line.getFields().get(1);
-                Field field3 = line.getFields().get(2);
-
-                if (field1.getImage() != Images.EMPTY && field1.getImage().equals(field2.getImage()) &&
-                        field2.getImage().equals(field3.getImage())) {
-                    return true;
-                }
-            }
-        }
-        return true;
     }
 
 
+    public void win() {
+
+        for (Line line : lineStorage.getWinLines()) {
+
+            boolean isWin = line.getFields().stream()
+                    .allMatch(field -> field.getImage() != Images.EMPTY && field.getImage().equals(line.getFields().get(0).getImage()));
+            if (isWin)
+                fieldStorage.getWinfield().setImage(line.getFields().get(0).getImage());
+
+        }
+
+    }
 
 
     @Override
