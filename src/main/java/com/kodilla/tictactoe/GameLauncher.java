@@ -20,15 +20,9 @@ public class GameLauncher extends Application {
     boolean winGame = false;
     boolean drawGame = false;
     Stage window;
+    Scene endScene;
 
 
-
-    public GameLauncher() {
-
-        this.fieldStorage = new FieldStorage(this);
-        this.lineStorage = new LineStorage(fieldStorage);
-
-    }
 
     public void winCheck() {
 
@@ -53,9 +47,18 @@ public class GameLauncher extends Application {
         }
     }
 
+    public GameLauncher() {
+
+        this.fieldStorage = new FieldStorage(this);
+        this.lineStorage = new LineStorage(fieldStorage);
+
+    }
+
+
+
 
     public void setEndScene() {
-
+      //  window.setScene(endScene);
     }
 
     @Override
@@ -94,7 +97,8 @@ public class GameLauncher extends Application {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         Scene endScene = new Scene(vBox, 600, 600, Color.BEIGE);
-        window.setScene(endScene);
+
+        //window.setScene(endScene);
         Button button1 = new Button("RESTART");
         button1.setOnAction(event -> window.setScene(scene));
         vBox.getChildren().add(button1);
