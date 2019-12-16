@@ -10,10 +10,5 @@ public class WinField extends ImageView {
         super(image);
     }
 
-
-    public void setWin() {
-        setImage(Images.CROSS);
-    }
-
 }
 

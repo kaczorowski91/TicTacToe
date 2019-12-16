@@ -13,7 +13,7 @@ public class LineStorage {
         winLines.add(new Line(fieldStorage.getField(0, 2), fieldStorage.getField(1, 2), fieldStorage.getField(2, 2)));
         winLines.add(new Line(fieldStorage.getField(0, 0), fieldStorage.getField(0, 1), fieldStorage.getField(0, 2)));
         winLines.add(new Line(fieldStorage.getField(1, 0), fieldStorage.getField(1, 1), fieldStorage.getField(1, 2)));
-        winLines.add(new Line(fieldStorage.getField(2, 2), fieldStorage.getField(2, 1), fieldStorage.getField(2, 2)));
+        winLines.add(new Line(fieldStorage.getField(2, 0), fieldStorage.getField(2, 1), fieldStorage.getField(2, 2)));
         winLines.add(new Line(fieldStorage.getField(0, 0), fieldStorage.getField(1, 1), fieldStorage.getField(2, 2)));
         winLines.add(new Line(fieldStorage.getField(0, 2), fieldStorage.getField(1, 1), fieldStorage.getField(2, 0)));
 

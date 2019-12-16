@@ -1,8 +1,17 @@
 package com.kodilla.tictactoe;
 
-import java.util.Iterator;
-
 public class Logic {
+
+
+    public Logic (GameLauncher gameLauncher){
+
+
+
+    }
+
+
+
+
 
 
 }
