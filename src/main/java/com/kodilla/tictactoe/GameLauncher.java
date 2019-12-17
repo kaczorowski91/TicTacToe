@@ -4,9 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -15,13 +13,9 @@ public class GameLauncher extends Application {
 
     private final FieldStorage fieldStorage;
     private final LineStorage lineStorage;
+    private final EndScene endScene;
 
-
-    boolean winGame = false;
-    boolean drawGame = false;
     Stage window;
-    Scene endScene;
-
 
 
     public void winCheck() {
@@ -32,34 +26,27 @@ public class GameLauncher extends Application {
                     .allMatch(field -> field.getImage() != Images.EMPTY && field.getImage().equals(line.getFields().get(0).getImage()));
             if (isWin) {
                 fieldStorage.getWinfield().setImage(line.getFields().get(0).getImage());
-                winGame = true;
+                endScene.display();
+            }
+            boolean drawGame = fieldStorage.getFieldList().stream()
+                    .noneMatch(field -> field.getImage().equals(Images.EMPTY));
+            if (drawGame) {
+                fieldStorage.getWinfield().setImage(Images.DRAW);
+                endScene.display();
 
             }
         }
-    }
 
-    public void drawCheck() {
 
-        drawGame = fieldStorage.getFieldList().stream()
-                .noneMatch(field -> field.getImage().equals(Images.EMPTY));
-        if (drawGame) {
-            fieldStorage.getWinfield().setImage(Images.DRAW);
-        }
     }
 
     public GameLauncher() {
 
         this.fieldStorage = new FieldStorage(this);
         this.lineStorage = new LineStorage(fieldStorage);
-
+        this.endScene = new EndScene(fieldStorage);
     }
 
-
-
-
-    public void setEndScene() {
-      //  window.setScene(endScene);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -91,17 +78,6 @@ public class GameLauncher extends Application {
         grid.add(fieldStorage.getField(2, 1), 2, 1);
         grid.add(fieldStorage.getField(2, 2), 2, 2);
         grid.add(fieldStorage.getWinfield(), 4, 1);
-
-
-
-        VBox vBox = new VBox();
-        vBox.setAlignment(Pos.CENTER);
-        Scene endScene = new Scene(vBox, 600, 600, Color.BEIGE);
-
-        //window.setScene(endScene);
-        Button button1 = new Button("RESTART");
-        button1.setOnAction(event -> window.setScene(scene));
-        vBox.getChildren().add(button1);
 
 
     }

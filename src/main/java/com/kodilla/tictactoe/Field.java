@@ -27,13 +27,7 @@ public class Field extends ImageView {
                 turnX = true;
             }
             gameLauncher.winCheck();
-            if (gameLauncher.winGame) {
-                gameLauncher.setEndScene();
-            }
-            gameLauncher.drawCheck();
-            if (gameLauncher.drawGame) {
-               gameLauncher.setEndScene();
-            }
+
 
         }
 

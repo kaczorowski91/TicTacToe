@@ -7,6 +7,7 @@ public class FieldStorage {
 
     private final Field[][] fields = new Field[3][3];
     private final List<Field> fieldList = new ArrayList<>();
+    private final WinField winField = new WinField(Images.EMPTY);
 
     public FieldStorage(GameLauncher gameLauncher) {
 
@@ -28,11 +29,9 @@ public class FieldStorage {
         return fieldList;
     }
 
-    public WinField winfield = new WinField(Images.EMPTY);
-
     public WinField getWinfield() {
-        return winfield;
+        return winField;
     }
 
 
-}
+    }
