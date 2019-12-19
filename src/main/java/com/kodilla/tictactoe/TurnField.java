@@ -3,10 +3,9 @@ package com.kodilla.tictactoe;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class WinField extends ImageView {
+public class TurnField extends ImageView {
 
-    public WinField(Image image) {
+    public TurnField (Image image){
         super(image);
     }
 }
-

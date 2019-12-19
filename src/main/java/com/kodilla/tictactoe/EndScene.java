@@ -8,26 +8,23 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 public class EndScene {
 
     private final FieldStorage fieldStorage;
 
-
     public EndScene(FieldStorage fieldStorage) {
         this.fieldStorage = fieldStorage;
-
     }
 
     public void display() {
         Stage endScene = new Stage();
+        Label label = new Label();
+        Button closeButton = new Button("New Game");
 
         endScene.initModality(Modality.APPLICATION_MODAL); //Block events to other windows
         endScene.setTitle("End Game");
         endScene.setMinWidth(500);
         endScene.setMinHeight(400);
-
-        Label label = new Label();
 
         if (fieldStorage.getWinfield().getImage().equals(Images.DRAW)) {
             label.setText(" DRAW ");
@@ -41,12 +38,8 @@ public class EndScene {
             label.setText(" CIRCLE WIN ");
         }
 
-
-        Button closeButton = new Button("New Game");
-
         closeButton.setOnAction(e -> {
             endScene.close();
-
             fieldStorage.getFieldList().stream()
                     .forEach(field -> field.setImage(Images.EMPTY));
             fieldStorage.getWinfield().setImage(Images.EMPTY);

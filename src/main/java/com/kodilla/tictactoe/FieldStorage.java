@@ -8,9 +8,9 @@ public class FieldStorage {
     private final Field[][] fields = new Field[3][3];
     private final List<Field> fieldList = new ArrayList<>();
     private final WinField winField = new WinField(Images.EMPTY);
+    private final TurnField turnField = new TurnField(Images.EMPTY);
 
     public FieldStorage(GameLauncher gameLauncher) {
-
 
         for (int x = 0; x < fields.length; x++) {
             for (int y = 0; y < fields[x].length; y++) {
@@ -18,20 +18,16 @@ public class FieldStorage {
                 fieldList.add(fields[x][y]);
             }
         }
-
     }
 
     public Field getField(int x, int y) {
         return fields[x][y];
     }
 
-    public List<Field> getFieldList() {
-        return fieldList;
-    }
+    public List<Field> getFieldList() { return fieldList; }
 
-    public WinField getWinfield() {
-        return winField;
-    }
+    public WinField getWinfield() { return winField; }
 
+    public TurnField getTurnField() {return  turnField; }
 
-    }
+}

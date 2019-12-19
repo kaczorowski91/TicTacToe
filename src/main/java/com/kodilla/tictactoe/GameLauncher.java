@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 
 public class GameLauncher extends Application {
 
@@ -15,8 +16,10 @@ public class GameLauncher extends Application {
     private final LineStorage lineStorage;
     private final EndScene endScene;
 
-    Stage window;
+    private int circleScoreValue = 0;
+    private int crossScoreValue = 0;
 
+    Stage window;
 
     public void winCheck() {
 
@@ -26,34 +29,69 @@ public class GameLauncher extends Application {
                     .allMatch(field -> field.getImage() != Images.EMPTY && field.getImage().equals(line.getFields().get(0).getImage()));
             if (isWin) {
                 fieldStorage.getWinfield().setImage(line.getFields().get(0).getImage());
+
+                if (fieldStorage.getWinfield().equals(Images.CIRCLE)) {
+                    circleScoreValue++;
+                }
+                if (fieldStorage.getWinfield().equals((Images.CROSS))) {
+                    crossScoreValue++;
+                }
                 endScene.display();
+
             }
             boolean drawGame = fieldStorage.getFieldList().stream()
                     .noneMatch(field -> field.getImage().equals(Images.EMPTY));
             if (drawGame) {
                 fieldStorage.getWinfield().setImage(Images.DRAW);
                 endScene.display();
-
             }
         }
+    }
 
-
+    public void turnCheck() {
+        if (Field.isTurnX()) {
+            fieldStorage.getTurnField().setImage(Images.CROSS);
+        } else if (!Field.isTurnX()) {
+            fieldStorage.getTurnField().setImage(Images.CIRCLE);
+        }
     }
 
     public GameLauncher() {
-
         this.fieldStorage = new FieldStorage(this);
         this.lineStorage = new LineStorage(fieldStorage);
         this.endScene = new EndScene(fieldStorage);
     }
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         window = primaryStage;
-
         GridPane grid = new GridPane();
+
+        Label turn = new Label("Turn");
+        turn.setFont(new Font(30));
+        turn.setTranslateX(65);
+        turn.setTranslateY(-130);
+
+        Label gameResult = new Label("Game Result:");
+        gameResult.setFont(new Font(40));
+        gameResult.setTranslateY(-50);
+
+        Label circle = new Label("Circle:");
+        circle.setFont(new Font(30));
+
+        Label circleScore = new Label("" + circleScoreValue);
+        circleScore.setFont(new Font(30));
+        circleScore.setTranslateX(85);
+
+        Label cross = new Label("Cross:");
+        cross.setFont(new Font(30));
+        cross.setTranslateY(50);
+
+        Label crossScore = new Label("" + crossScoreValue);
+        crossScore.setFont(new Font(30));
+        crossScore.setTranslateX(85);
+        crossScore.setTranslateY(50);
 
         grid.setAlignment(Pos.CENTER_LEFT);
         grid.setPadding(new Insets(0, 0, 0, 20));
@@ -62,11 +100,9 @@ public class GameLauncher extends Application {
 
         Scene scene = new Scene(grid, 1000, 800, Color.YELLOW);
 
-
         window.setScene(scene);
         window.setTitle("TicTacToeNEW");
         window.show();
-
 
         grid.add(fieldStorage.getField(0, 0), 0, 0);
         grid.add(fieldStorage.getField(1, 0), 1, 0);
@@ -77,9 +113,13 @@ public class GameLauncher extends Application {
         grid.add(fieldStorage.getField(0, 2), 0, 2);
         grid.add(fieldStorage.getField(2, 1), 2, 1);
         grid.add(fieldStorage.getField(2, 2), 2, 2);
-        grid.add(fieldStorage.getWinfield(), 4, 1);
-
-
+        grid.add(fieldStorage.getTurnField(), 4, 0);
+        grid.add(turn, 4, 0);
+        grid.add(gameResult, 4, 1);
+        grid.add(circle, 4, 1);
+        grid.add(cross, 4, 1);
+        grid.add(circleScore, 4, 1);
+        grid.add(crossScore, 4, 1);
     }
 
     public static void main(String[] args) {

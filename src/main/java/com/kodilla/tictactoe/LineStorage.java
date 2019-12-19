@@ -23,5 +23,4 @@ public class LineStorage {
         return winLines;
     }
 
-
 }

@@ -9,12 +9,8 @@ public class Line {
 
     List<Field> fields;
 
-
     public Line(Field... fields) {
-
         this.fields = new ArrayList<>(Arrays.asList(fields));
-
-
     }
 
     public List<Field> getFields() {
