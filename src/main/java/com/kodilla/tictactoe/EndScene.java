@@ -23,8 +23,8 @@ public class EndScene {
 
         endScene.initModality(Modality.APPLICATION_MODAL); //Block events to other windows
         endScene.setTitle("End Game");
-        endScene.setMinWidth(500);
-        endScene.setMinHeight(400);
+        endScene.setMinWidth(200);
+        endScene.setMinHeight(200);
 
         if (fieldStorage.getWinfield().getImage().equals(Images.DRAW)) {
             label.setText(" DRAW ");
