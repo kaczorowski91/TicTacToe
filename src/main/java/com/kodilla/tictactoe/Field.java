@@ -5,9 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class Field extends ImageView {
 
-
     private final GameLauncher gameLauncher;
-
 
     public Field(Image image, GameLauncher gameLauncher) {
         super(image);
@@ -15,17 +13,15 @@ public class Field extends ImageView {
         this.gameLauncher = gameLauncher;
     }
 
-
     private void mouseClicked() {
 
         if (getImage() == Images.EMPTY) {
-
             this.setImage(Images.CROSS);
-        }
-        gameLauncher.winCheck();
 
-        gameLauncher.aiMove();
-        gameLauncher.winCheck();
+            gameLauncher.winCheck();
+            gameLauncher.aiMove();
+            gameLauncher.winCheck();
+        }
     }
 }
 

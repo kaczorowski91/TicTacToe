@@ -4,9 +4,9 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -21,6 +21,11 @@ public class GameLauncher extends Application {
     private int crossScoreValue = 0;
     private final Label crossScore = new Label("" + crossScoreValue);
     private final Label circleScore = new Label("" + circleScoreValue);
+    private final Label level = new Label("Level: Normal");
+    private final Button reset = new Button("Score Reset");
+    private final Button easyLevel = new Button("Easy Level");
+    private final Button normalLevel = new Button("Normal Level");
+    private boolean playEasyLevel=false;
 
     private Stage window;
 
@@ -32,9 +37,12 @@ public class GameLauncher extends Application {
     }
 
     public void aiMove() {
-
-        ai.move();
+        if(!playEasyLevel)
+            ai.move();
+        if(playEasyLevel)
+            ai.easyMove();
     }
+
 
     public void winCheck() {
 
@@ -65,12 +73,12 @@ public class GameLauncher extends Application {
         }
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         window = primaryStage;
         GridPane grid = new GridPane();
-
 
         Label gameResult = new Label("Game Result:");
         gameResult.setFont(new Font(40));
@@ -79,7 +87,6 @@ public class GameLauncher extends Application {
         Label circle = new Label("Circle:");
         circle.setFont(new Font(30));
 
-
         circleScore.setFont(new Font(30));
         circleScore.setTranslateX(85);
 
@@ -87,21 +94,64 @@ public class GameLauncher extends Application {
         cross.setFont(new Font(30));
         cross.setTranslateY(50);
 
-
         crossScore.setFont(new Font(30));
         crossScore.setTranslateX(85);
         crossScore.setTranslateY(50);
+
+        reset.setFont(new Font(30));
+        reset.setTranslateX(60);
+
+        easyLevel.setFont(new Font(30));
+        easyLevel.setTranslateY(-70);
+
+        normalLevel.setFont(new Font(30));
+
+        level.setFont(new Font(30));
+        level.setTranslateY(70);
 
         grid.setAlignment(Pos.CENTER_LEFT);
         grid.setPadding(new Insets(0, 0, 0, 20));
         grid.setHgap(20);
         grid.setVgap(20);
 
-        Scene scene = new Scene(grid, 1000, 800, Color.YELLOW);
+        Scene scene = new Scene(grid, 1000, 800);
 
         window.setScene(scene);
         window.setTitle("TicTacToeNEW");
         window.show();
+
+        reset.setOnAction(event -> {
+            circleScoreValue = 0;
+            crossScoreValue = 0;
+            circleScore.setText("" + circleScoreValue);
+            crossScore.setText("" + crossScoreValue);
+
+        });
+
+        easyLevel.setOnAction(event -> {
+            playEasyLevel=true;
+            fieldStorage.getFieldList().stream()
+                    .forEach(field -> field.setImage(Images.EMPTY));
+            fieldStorage.getWinfield().setImage(Images.EMPTY);
+            circleScoreValue = 0;
+            crossScoreValue = 0;
+            circleScore.setText("" + circleScoreValue);
+            crossScore.setText("" + crossScoreValue);
+            level.setText("Easy level");
+        });
+
+        normalLevel.setOnAction(event -> {
+            playEasyLevel=false;
+            fieldStorage.getFieldList().stream()
+                    .forEach(field -> field.setImage(Images.EMPTY));
+            fieldStorage.getWinfield().setImage(Images.EMPTY);
+            circleScoreValue = 0;
+            crossScoreValue = 0;
+            circleScore.setText("" + circleScoreValue);
+            crossScore.setText("" + crossScoreValue);
+            level.setText("Normal level");
+
+        });
 
         grid.add(fieldStorage.getField(0, 0), 0, 0);
         grid.add(fieldStorage.getField(1, 0), 1, 0);
@@ -118,6 +168,10 @@ public class GameLauncher extends Application {
         grid.add(cross, 4, 1);
         grid.add(circleScore, 4, 1);
         grid.add(crossScore, 4, 1);
+        grid.add(reset, 4, 2);
+        grid.add(easyLevel,4,0);
+        grid.add(normalLevel,4,0);
+        grid.add(level, 4 , 0);
     }
 
     public static void main(String[] args) {

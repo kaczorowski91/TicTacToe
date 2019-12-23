@@ -11,21 +11,53 @@ public class Ai {
 
     public void move() {
 
-        boolean aIPlayed=false;
+        boolean aIPlayed = false;
 
-        if (!aIPlayed && fieldStorage.getField(1, 1).getImage().equals(Images.CROSS)) {
-
-
-            Field fieldToSet = fieldStorage.getField(0, 0);
-            if (fieldToSet.getImage().equals(Images.EMPTY)) {
-                fieldToSet.setImage(Images.CIRCLE);
-                aIPlayed=true;
-            }
+        if (!aIPlayed && fieldStorage.getField(1, 1).getImage().equals(Images.EMPTY)) { //first round check centre, centre available
+            fieldStorage.getField(1, 1).setImage(Images.CIRCLE);
+            aIPlayed = true;
         }
 
+        if (!aIPlayed && fieldStorage.getField(1, 1).getImage().equals(Images.CROSS) &&  // first round check centre, centre unavailable
+                fieldStorage.getField(1, 0).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(1, 0).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
 
+        if (!aIPlayed && fieldStorage.getField(0, 0).getImage().equals(Images.CROSS) &&  //second round first cross, centre unavailable
+                fieldStorage.getField(2, 2).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(2, 2).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
 
-        if(!aIPlayed) {
+        if (!aIPlayed && fieldStorage.getField(2, 0).getImage().equals(Images.CROSS) && //second round first cross, centre unavailable
+                fieldStorage.getField(0, 2).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(0, 2).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
+        if (!aIPlayed && fieldStorage.getField(0, 2).getImage().equals(Images.CROSS) && //second round first cross, centre unavailable
+                fieldStorage.getField(2, 0).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(2, 0).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
+
+        if (!aIPlayed && fieldStorage.getField(2, 2).getImage().equals(Images.CROSS) && //second round first cross, centre unavailable
+                fieldStorage.getField(0, 0).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(0, 0).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
+
+        if (!aIPlayed && fieldStorage.getField(0, 2).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(0, 2).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
+
+        if (!aIPlayed && fieldStorage.getField(2, 0).getImage().equals(Images.EMPTY)) {
+            fieldStorage.getField(2, 0).setImage(Images.CIRCLE);
+            aIPlayed = true;
+        }
+
+        if (!aIPlayed) {
             for (Field field : fieldStorage.getFieldList()) {
                 if (field.getImage().equals(Images.EMPTY)) {
                     field.setImage(Images.CIRCLE);
@@ -34,5 +66,20 @@ public class Ai {
             }
         }
     }
+
+
+    public void easyMove() {
+
+        boolean aIPlayed = false;
+        if (!aIPlayed) {
+            for (Field field : fieldStorage.getFieldList()) {
+                if (field.getImage().equals(Images.EMPTY)) {
+                    field.setImage(Images.CIRCLE);
+                    break;
+                }
+            }
+        }
+    }
+
 
 }
