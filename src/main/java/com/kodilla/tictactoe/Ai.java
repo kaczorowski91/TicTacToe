@@ -13,7 +13,7 @@ public class Ai {
 
         boolean aIPlayed = false;
 
-        if (!aIPlayed && fieldStorage.getField(1, 1).getImage().equals(Images.EMPTY)) { //first round check centre, centre available
+        if (fieldStorage.getField(1, 1).getImage().equals(Images.EMPTY)) { //first round check centre, centre available
             fieldStorage.getField(1, 1).setImage(Images.CIRCLE);
             aIPlayed = true;
         }
@@ -58,28 +58,19 @@ public class Ai {
         }
 
         if (!aIPlayed) {
-            for (Field field : fieldStorage.getFieldList()) {
-                if (field.getImage().equals(Images.EMPTY)) {
-                    field.setImage(Images.CIRCLE);
-                    break;
-                }
-            }
+            easyMove();
         }
     }
 
 
     public void easyMove() {
 
-        boolean aIPlayed = false;
-        if (!aIPlayed) {
-            for (Field field : fieldStorage.getFieldList()) {
-                if (field.getImage().equals(Images.EMPTY)) {
-                    field.setImage(Images.CIRCLE);
-                    break;
-                }
+        for (Field field : fieldStorage.getFieldList()) {
+            if (field.getImage().equals(Images.EMPTY)) {
+                field.setImage(Images.CIRCLE);
+                break;
             }
         }
     }
-
-
 }
+
