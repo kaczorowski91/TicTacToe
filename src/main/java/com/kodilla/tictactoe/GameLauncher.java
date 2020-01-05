@@ -27,8 +27,6 @@ public class GameLauncher extends Application {
     private final Button normalLevel = new Button("Normal Level");
     private boolean playEasyLevel=false;
 
-    private Stage window;
-
     public GameLauncher() {
         this.fieldStorage = new FieldStorage(this);
         this.lineStorage = new LineStorage(fieldStorage);
@@ -42,7 +40,6 @@ public class GameLauncher extends Application {
         if(playEasyLevel)
             ai.easyMove();
     }
-
 
     public void winCheck() {
 
@@ -62,7 +59,6 @@ public class GameLauncher extends Application {
                     crossScore.setText("" + crossScoreValue);
                 }
                 endScene.display();
-
             }
             boolean drawGame = fieldStorage.getFieldList().stream()
                     .noneMatch(field -> field.getImage().equals(Images.EMPTY));
@@ -73,11 +69,20 @@ public class GameLauncher extends Application {
         }
     }
 
+    public void sceneClean(){
+        fieldStorage.getFieldList()
+                .forEach(field -> field.setImage(Images.EMPTY));
+        fieldStorage.getWinfield().setImage(Images.EMPTY);
+        circleScoreValue = 0;
+        crossScoreValue = 0;
+        circleScore.setText("" + circleScoreValue);
+        crossScore.setText("" + crossScoreValue);
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        window = primaryStage;
         GridPane grid = new GridPane();
 
         Label gameResult = new Label("Game Result:");
@@ -116,9 +121,9 @@ public class GameLauncher extends Application {
 
         Scene scene = new Scene(grid, 1000, 800);
 
-        window.setScene(scene);
-        window.setTitle("TicTacToeNEW");
-        window.show();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("TicTacToeNEW");
+        primaryStage.show();
 
         reset.setOnAction(event -> {
             circleScoreValue = 0;
@@ -130,25 +135,13 @@ public class GameLauncher extends Application {
 
         easyLevel.setOnAction(event -> {
             playEasyLevel=true;
-            fieldStorage.getFieldList().stream()
-                    .forEach(field -> field.setImage(Images.EMPTY));
-            fieldStorage.getWinfield().setImage(Images.EMPTY);
-            circleScoreValue = 0;
-            crossScoreValue = 0;
-            circleScore.setText("" + circleScoreValue);
-            crossScore.setText("" + crossScoreValue);
+            this.sceneClean();
             level.setText("Easy level");
         });
 
         normalLevel.setOnAction(event -> {
             playEasyLevel=false;
-            fieldStorage.getFieldList().stream()
-                    .forEach(field -> field.setImage(Images.EMPTY));
-            fieldStorage.getWinfield().setImage(Images.EMPTY);
-            circleScoreValue = 0;
-            crossScoreValue = 0;
-            circleScore.setText("" + circleScoreValue);
-            crossScore.setText("" + crossScoreValue);
+            this.sceneClean();
             level.setText("Normal level");
 
         });
